@@ -72,8 +72,8 @@ def RandInit():
 
 def main():
     data = pd.read_csv('ratings.csv',header = None,usecols = range(0,6)).values  ##Importing data
-    Y = data[1:]
-    Y = np.delete(Y,0,1)   ##Forming the matrix of ratings by users .
+    data = data[1:]
+    Y = np.delete(data,0,1)   ##Forming the matrix of ratings by users .
     for i in range(no_of_movies):
         for j in range(no_of_users):
             Y[i][j] = float(Y[i][j])
@@ -89,5 +89,24 @@ def main():
     print(Theta)
 
     print("Prediction is:")
-    print(np.matmul(X,np.transpose(Theta)))
+    predict = np.matmul(X,np.transpose(Theta))
+    print(predict)   ##This should be close to Y if your approach is correct.
+
+    print("Enter your user number(1-5): ")
+    a = eval(input())
+    print("Finding best suitable movie for you.")
+    set_to_watch = []   ##Set of movies which user hasn't watched.
+    for i in range(no_of_movies):
+        if(Y[i][a-1]>5.0):
+            set_to_watch.append(i)
+    max = 0.0
+    num = -1
+    for i in range(len(set_to_watch)):
+        if(predict[set_to_watch[i]-1][a-1]>max):
+            max = predict[set_to_watch[i]-1][a-1]
+            num = set_to_watch[i]
+        else:
+            continue
+    print("Out of the given set of movies that you haven't watched the movie you'll love the most is: ")
+    print(data[i-1][0])
 main()
