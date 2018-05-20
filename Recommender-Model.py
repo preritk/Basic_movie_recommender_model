@@ -36,7 +36,7 @@ def costfunc(X,Y,Theta):
         for j in range(no_of_users):
             hypothesis = np.matmul(X,np.transpose(Theta))  ##hypothesis should be of same size as of Y which will be...
                                                            ##...achieved by multiplying in this way .
-            if Y[i][j]<=10.0:                               ##Removing those entries where there is no rating.
+            if Y[i][j]<=5.0:                               ##Removing those entries where there is no rating.
                 J += ((1/2)*math.pow((hypothesis[i][j] - Y[i][j]),2))    ##This is loss term or least squared error .
     ##Now we add regularisation term to avoid overfitting .
     ##Firstly adding regularisation term because of X.
