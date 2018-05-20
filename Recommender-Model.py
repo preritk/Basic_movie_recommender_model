@@ -26,8 +26,8 @@ def changerfunc(X,Y,hypothesis,Theta):   ##Extension of GradientDescent function
                 loss[j][i] = 0.0
     temp1 = alpha*(np.matmul(loss,Theta) + lamda*(X))
     temp2 = alpha*(np.matmul(np.transpose(loss),X) + lamda*(Theta))
-    X = X - temp1
-    Theta = Theta - temp2
+    X = X - temp1         ##updating X
+    Theta = Theta - temp2   ##updating Theta
     return X,Theta
 
 def costfunc(X,Y,Theta):
